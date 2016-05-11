@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tempoFeedHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <tempoFeed>
+        <uuid>b293ec80-0b27-4e9f-8319-267a0f39625b</uuid>
+        <name>AW Registration</name>
+        <description>Feed for updates about AW Registrations</description>
+        <showInCatalog>true</showInCatalog>
+        <systemFeed>false</systemFeed>
+    </tempoFeed>
+    <roleMap>
+        <role name="administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dced-fa84-8000-aae2-011e94011e94_11</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</tempoFeedHaul>

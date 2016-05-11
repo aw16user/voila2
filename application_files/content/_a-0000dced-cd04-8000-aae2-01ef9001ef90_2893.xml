@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>AR_AWRegistrationDetails</name>
+        <uuid>_a-0000dced-cd04-8000-aae2-01ef9001ef90_2893</uuid>
+        <description>&quot;Base&quot; interface module, with all the basic fields of the record. Used by the record dashboard, create/update, and task forms.</description>
+        <parentUuid>f6dd240e-bdc0-4f59-b0f1-48083044b317</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  /* The local variables store the options for the Pick Single / Multiple from List fields    *
+   * We only show the active options, plus any inactive options already stored on this record */
+  local!AR_statusOptions: if(ri!record.AR_status.active,#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2880&quot;(#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2911&quot;(), null),#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2880&quot;(#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2911&quot;(), ri!record.AR_status.value)),
+  local!AR_priorityOptions: if(ri!record.AR_priority.active,#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2880&quot;(#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2912&quot;(), null),#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2880&quot;(#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2912&quot;(), ri!record.AR_priority.value)),
+  {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: ri!label,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Full Name&quot;,
+          labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+          instructions: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          helpTooltip: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          placeholder: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          required: not(ri!readOnly),
+          value: ri!record.fullName,
+          saveInto: ri!record.fullName,
+          readOnly: ri!readOnly,
+          validations: if(
+            len(ri!record.fullName) &lt;= 200,
+            &quot;&quot;,
+            &quot;Value may not be longer than 200 characters. You have entered &quot; &amp; len(ri!record.fullName) &amp; &quot; characters.&quot;
+          )
+        ),
+        if(
+          ri!readOnly,
+          #&quot;SYSTEM_SYSRULES_textField&quot;(
+            label: &quot;Status&quot;,
+            labelPosition: &quot;ADJACENT&quot;,
+            value: ri!record.AR_status.value,
+            readOnly: true
+          ),
+          #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+            label: &quot;Status&quot;,
+            labelPosition: &quot;ABOVE&quot;,
+            instructions: &quot;&quot;,
+            helpTooltip: &quot;&quot;,
+            placeholderLabel: &quot;--- Select a Value ---&quot;,
+            choiceLabels: local!AR_statusOptions.value,
+            choiceValues: local!AR_statusOptions,
+            required: not(ri!readOnly),
+            value: ri!record.AR_status,
+            saveInto: ri!record.AR_status
+          )
+        ),
+        if(
+          ri!readOnly,
+          #&quot;SYSTEM_SYSRULES_imageField&quot;(
+            label: &quot;Priority&quot;,
+            labelPosition: &quot;ADJACENT&quot;,
+            images: #&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2889&quot;(ri!record.AR_priority.value),
+            size: &quot;ICON&quot;
+          ),
+          #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+            label: &quot;Priority&quot;,
+            labelPosition: &quot;ABOVE&quot;,
+            instructions: &quot;&quot;,
+            helpTooltip: &quot;&quot;,
+            placeholderLabel: &quot;--- Select a Value ---&quot;,
+            choiceLabels: local!AR_priorityOptions.value,
+            choiceValues: local!AR_priorityOptions,
+            required: not(ri!readOnly),
+            value: ri!record.AR_priority,
+            saveInto: ri!record.AR_priority
+          )
+        ),
+        if(
+          ri!creating,
+          {},
+          {
+            #&quot;SYSTEM_SYSRULES_linkField&quot;(
+              label: &quot;Created By&quot;,
+              labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+              links: #&quot;SYSTEM_SYSRULES_userRecordLink&quot;(
+                label: #&quot;47db2a1f-08e4-40d4-b467-7d07e9a7aa05_FORMATNAME&quot;(ri!record.createdBy),
+                user: ri!record.createdBy
+              )
+            ),
+            #&quot;SYSTEM_SYSRULES_textField&quot;(
+              label: &quot;Created On&quot;,
+              labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+              value: #&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2875&quot;(ri!record.createdOn),
+              readOnly: true
+            )
+          }
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Company&quot;,
+          labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+          instructions: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          helpTooltip: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          placeholder: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          required: false,
+          value: ri!record.company,
+          saveInto: ri!record.company,
+          readOnly: ri!readOnly,
+          validations: if(
+            len(ri!record.company) &lt;= 200,
+            &quot;&quot;,
+            &quot;Value may not be longer than 200 characters. You have entered &quot; &amp; len(ri!record.company) &amp; &quot; characters.&quot;
+          )
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Interests&quot;,
+          labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+          instructions: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          helpTooltip: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          placeholder: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          required: false,
+          value: ri!record.interests,
+          saveInto: ri!record.interests,
+          readOnly: ri!readOnly,
+          validations: if(
+            len(ri!record.interests) &lt;= 200,
+            &quot;&quot;,
+            &quot;Value may not be longer than 200 characters. You have entered &quot; &amp; len(ri!record.interests) &amp; &quot; characters.&quot;
+          )
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;email&quot;,
+          value: ri!record.email,
+          saveInto: ri!record.email,
+          labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+           instructions: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          helpTooltip: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          placeholder: if(ri!readOnly, &quot;&quot;, &quot;&quot;),
+          readOnly: ri!readOnly,
+          validations: if(
+            #&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2985&quot;(ri!record.email),
+            &quot;&quot;,
+            &quot;The value is not a valid email.&quot;
+            )
+        ),
+        if(
+          ri!creating,
+          {},
+          {
+            #&quot;SYSTEM_SYSRULES_linkField&quot;(
+              label: &quot;Updated By&quot;,
+              labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+              links: #&quot;SYSTEM_SYSRULES_userRecordLink&quot;(
+                label: #&quot;47db2a1f-08e4-40d4-b467-7d07e9a7aa05_FORMATNAME&quot;(ri!record.updatedBy),
+                user: ri!record.updatedBy
+              )
+            ),
+            #&quot;SYSTEM_SYSRULES_textField&quot;(
+              label: &quot;Updated On&quot;,
+              labelPosition: if(ri!readOnly, &quot;ADJACENT&quot;, &quot;ABOVE&quot;),
+              value: #&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2875&quot;(ri!record.updatedOn),
+              readOnly: true
+            )
+          }
+        )
+      }
+    ),
+    #&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2888&quot;(
+      documents: ri!documents,
+      readOnly: ri!readOnly,
+      target: if(ri!creating,
+        #&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2866&quot;,
+        ri!record.folderId
+      )
+    )
+  }
+)</definition>
+        <namedTypedValue>
+            <name>record</name>
+            <type>
+                <name>AWRegistration</name>
+                <namespace>urn:com:appian:types:AR</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>creating</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>readOnly</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>documents</name>
+            <type>
+                <name>CollaborationDocument?list</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>label</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:appian:types:AR" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:AWRegistration"/>
+                    <a:nameRef>record</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:boolean"/>
+                    <a:nameRef>creating</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:boolean"/>
+                    <a:nameRef>readOnly</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:nameRef>documents</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>label</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tempoReportHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <tempoReport name="AW Registrations" a:uuid="b8a77b96-7aec-4615-aee6-2189bf260526">
+        <a:description>Aggregated information and metrics on AW Registrations</a:description>
+        <a:uiExpr>=#&quot;_a-0000dced-cd04-8000-aae2-01ef9001ef90_2899&quot;()</a:uiExpr>
+        <a:urlStub>b26pBg</a:urlStub>
+    </tempoReport>
+    <roleMap>
+        <role name="report_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dced-fa84-8000-aae2-011e94011e94_11</groupUuid>
+            </groups>
+        </role>
+        <role name="report_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dced-fa84-8000-aae2-011e94011e94_10</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</tempoReportHaul>

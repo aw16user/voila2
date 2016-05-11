@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataStoreHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <dataStore>
+        <uuid>_a-0000dced-cd04-8000-aae2-01ef9001ef90_2905</uuid>
+        <name>AW Registrations</name>
+        <description></description>
+        <dataSourceKey>jdbc/AppianAnywhere</dataSourceKey>
+        <adaptingExplicitSqlNames>false</adaptingExplicitSqlNames>
+        <autoUpdateSchema>true</autoUpdateSchema>
+        <entities>
+            <entity>
+                <uuid>7c6e533a-e0f1-4d3b-a48b-f4beac918d22</uuid>
+                <name>AWRegistrationStatus</name>
+                <type>{urn:com:appian:types:AR}AWRegistrationStatus</type>
+            </entity>
+            <entity>
+                <uuid>73b28db1-917f-4a66-b08e-adda9d298a9e</uuid>
+                <name>AWRegistrationPriority</name>
+                <type>{urn:com:appian:types:AR}AWRegistrationPriority</type>
+            </entity>
+            <entity>
+                <uuid>8ec83c96-b38a-4a1f-8f11-a96a4769088a</uuid>
+                <name>AWRegistrationChange</name>
+                <type>{urn:com:appian:types:AR}AWRegistrationChange</type>
+            </entity>
+            <entity>
+                <uuid>20e26f20-920c-4a9d-a022-16f2e5cd560e</uuid>
+                <name>AWRegistration</name>
+                <type>{urn:com:appian:types:AR}AWRegistration</type>
+            </entity>
+        </entities>
+    </dataStore>
+    <isPublished>true</isPublished>
+    <roleMap>
+        <role allowForAll="false" inherit="false" name="administrators">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dced-fa84-8000-aae2-011e94011e94_11</groupUuid>
+            </groups>
+        </role>
+        <role allowForAll="false" inherit="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="readers">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dced-fa84-8000-aae2-011e94011e94_10</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</dataStoreHaul>
